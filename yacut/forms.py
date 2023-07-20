@@ -1,21 +1,23 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, URLField
-from wtforms.validators import DataRequired, Length, Optional
+from wtforms import StringField, SubmitField, URLField
+from wtforms.validators import DataRequired, Length, Optional, URL
+from settings import MAX_URL_SIZE,  MAX_SHORT_ID_SIZE
 
 
-class URLMapForm(FlaskForm):
+class URLForm(FlaskForm):
     original_link = URLField(
         'Длинная ссылка',
         validators=[DataRequired(message='Обязательное поле'),
-                    Length(1, 256)]
+                    URL(message='Введите корректный URL адрес'),
+                    Length(max=MAX_URL_SIZE)]
     )
-    custom_id = URLField(
-        'Короткая ссылка',
-        validators=[Length(1, 16), Optional()]
+    custom_id = StringField(
+        'Ваш вариант короткой ссылки',
+        validators=[Length(max=MAX_SHORT_ID_SIZE),
+                    Optional()]
     )
     submit = SubmitField('Добавить')
 
-# ヽ(´▽`)/
 
 # kaonashi
 # =^..^=______/
