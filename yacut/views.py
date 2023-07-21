@@ -34,10 +34,11 @@ def index_view():
         )
     return render_template('index.html', form=form)
 
-# @app.route('/<string:short>')
-# def redirect_view(short):
-#     original_link = URLMap.query.filter_by(short=short).first_or_404()
-#     return redirect(original_link.original)
+
+@app.route('/<string:short>')
+def redirect_url(short):
+    url = URLMap.query.filter_by(short=short).first_or_404()
+    return redirect(url.original)
 
 
 

@@ -6,23 +6,28 @@ from flask import jsonify, request
 
 from . import app, db
 from .models import URLMap
+from .error_handlers import InvalidAPIUsage
 
 
 @app.route('/api/id/<string:short_id>/', methods=['GET'])
 def get_url(short_id):
-    # Получить объект по id или выбросить ошибку
-    data = URLMap.query.get_or_404(short_id)
-    # Конвертировать данные в JSON и вернуть объект и код ответа API
+    data = URLMap.query.get(short_id)
+    if data is None:
+        raise InvalidAPIUsage('В базе данных нет мнений', HTTPStatus.NO_CONTENT)
     return jsonify({'url': data.to_dict()}), HTTPStatus.OK
 
 
 @app.route('/api/id/', methods=['POST'])
 def add_url():
-    # Получение данные из запроса в виде словаря
     data = request.get_json()
+    if 'original' not in data:
+        raise InvalidAPIUsage('Отсутствует тело запроса')
+
+    if URLMap.query.filter_by(short=data['custom_id']).first() is not None:
+        raise InvalidAPIUsage('Такая ссылка уже есть в базе данных')
+
     original = data.get('url')
     custom_url = data.get('custom_id')
-    # Создание нового пустого экземпляра модели
     url_map = URLMap(
         original=original,
         short=custom_url
