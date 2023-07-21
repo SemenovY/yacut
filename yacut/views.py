@@ -2,7 +2,8 @@ from http import HTTPStatus
 
 from . import app, db
 
-from flask import abort, render_template, url_for, flash
+from flask import redirect, render_template, flash
+from .api_views import get_unique_short_id
 from .forms import URLForm
 from .models import URLMap
 
@@ -33,12 +34,11 @@ def index_view():
         )
     return render_template('index.html', form=form)
 
-# @app.route('/<short_id>', methods=['GET'])
-# def redirect(short_id):
-#     # Теперь можно запрашивать мнение по id
-#     link = URLMap.query.get_or_404(short_id)
-#     # И передавать его в шаблон
-#     return render_template('index.html', link=link)
+@app.route('/<string:short>')
+def redirect_view(short):
+    original_link = URLMap.query.filter_by(short=short).first_or_404()
+    return redirect(original_link.original)
+
 
 
 # kaonashi
