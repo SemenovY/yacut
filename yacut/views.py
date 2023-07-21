@@ -23,7 +23,7 @@ def index_view():
 
         url_map = URLMap(
             original=form.original_link.data,
-            short=form.custom_id
+            short=form.custom_id.data
         )
         db.session.add(url_map)
         db.session.commit()
