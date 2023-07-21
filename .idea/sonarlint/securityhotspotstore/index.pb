@@ -4,5 +4,11 @@
 :
 
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
-G
-yacut/error_handlers.py,1/0/10d3d2e75d95ee43202c818903d3a5d363e0de66
+9
+	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+4
+.env,3/c/3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
+K
+yacut/templates/footer.html,3/7/3746da4dcd2d4d36564e2a083148ae055280ccf0
+I
+yacut/templates/base.html,2/b/2bd49e413199e848fe9ccbc8b40de7f9e2c3e4e4
