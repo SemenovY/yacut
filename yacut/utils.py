@@ -5,8 +5,9 @@ from .constants import MIN_SHORT
 
 def get_unique_short_id():
     letters = string.ascii_letters + string.digits
-    rand_string = ''.join(random.choice(letters) for _ in range(MIN_SHORT))
-    return rand_string
+    short_id = ''.join(random.choice(letters) for _ in range(MIN_SHORT))
+
+    return short_id
 
 # Автоматически сгенерированная короткая ссылка должна добавляться в базу
 # данных, но только если в ней уже нет такого же идентификатора.

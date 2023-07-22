@@ -23,6 +23,5 @@ class URLMap(db.Model):
                 setattr(self, field, data[field])
 
 
-
 # kaonashi
 # =^..^=______/
