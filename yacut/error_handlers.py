@@ -4,7 +4,7 @@ from flask import jsonify, render_template
 from . import app, db
 
 
-class InvalidAPIUsage(Exception):
+class Invalid_api_usage(Exception):
     """Для апи, ошибка 400."""
 
     status_code = 400
@@ -19,7 +19,7 @@ class InvalidAPIUsage(Exception):
         return dict(message=self.message)
 
 
-@app.errorhandler(InvalidAPIUsage)
+@app.errorhandler(Invalid_api_usage)
 def invalid_api_usage(error):
     """Словарь и статус код."""
     return jsonify(error.to_dict()), error.status_code

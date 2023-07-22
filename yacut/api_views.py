@@ -6,7 +6,7 @@ from flask import jsonify, request
 
 from . import app, db
 from .constants import MAX_SHORT_ID_SIZE, REG_CHECK, SHORT_LINK
-from .error_handlers import InvalidAPIUsage
+from .error_handlers import Invalid_api_usage
 from .models import URLMap
 from .utils import get_unique_short_id
 
@@ -16,7 +16,7 @@ def get_url(short_id):
     """Получаем на вход короткую ссылку, проверяем и возвращаем оригинал."""
     data = URLMap.query.filter_by(short=short_id).first()
     if data is None:
-        raise InvalidAPIUsage('Указанный id не найден',
+        raise Invalid_api_usage('Указанный id не найден',
                               HTTPStatus.NOT_FOUND)
     return jsonify(url=data.original), HTTPStatus.OK
 
@@ -31,9 +31,9 @@ def add_url():
     """
     data = request.get_json()
     if not data:
-        raise InvalidAPIUsage('Отсутствует тело запроса')
+        raise Invalid_api_usage('Отсутствует тело запроса')
     if 'url' not in data:
-        raise InvalidAPIUsage('"url" является обязательным полем!')
+        raise Invalid_api_usage('"url" является обязательным полем!')
     if (
             'custom_id' not in data or
             data['custom_id'] == '' or
@@ -43,9 +43,9 @@ def add_url():
     else:
         short_id = data['custom_id']
     if URLMap.query.filter_by(short=short_id).first() is not None:
-        raise InvalidAPIUsage(f'Имя "{short_id}" уже занято.')
+        raise Invalid_api_usage(f'Имя "{short_id}" уже занято.')
     if len(short_id) > MAX_SHORT_ID_SIZE or not re.match(REG_CHECK, short_id):
-        raise InvalidAPIUsage(
+        raise Invalid_api_usage(
             'Указано недопустимое имя для короткой ссылки',
             HTTPStatus.BAD_REQUEST
         )
