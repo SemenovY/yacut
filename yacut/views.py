@@ -1,16 +1,28 @@
+"""
+Для главной страницы обрабатываем POST запрос.
+
+Возвращаем рабочую ссылку.
+"""
 from http import HTTPStatus
 
-from . import app, db
+from flask import flash, redirect, render_template
 
-from flask import redirect, render_template, flash
-from .utils import get_unique_short_id
+from . import app, db
+from .constants import INDEX_HTML
 from .forms import URLForm
 from .models import URLMap
-from .constants import INDEX_HTML
+from .utils import get_unique_short_id
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index_view():
+    """
+    Получаем форму.
+
+    Делаем проверки, при необходимости генерируем короткую ссылку.
+    Сохраняем в базу.
+    Возвращаем статус и уведомление.
+    """
     form = URLForm()
     if not form.validate_on_submit():
         return render_template(INDEX_HTML, form=form)
@@ -19,7 +31,6 @@ def index_view():
     if URLMap.query.filter_by(short=short_url).first() is not None:
         flash(f'Имя {short_url} уже занято!')
         return render_template(INDEX_HTML, form=form)
-
     if short_url is None or short_url == '':
         form.custom_id.data = get_unique_short_id()
 
@@ -38,10 +49,6 @@ def index_view():
 
 @app.route('/<string:short>')
 def redirect_url(short):
+    """Возвращаем если есть ссылку, а для перехода - 404."""
     urlmap = URLMap.query.filter_by(short=short).first_or_404()
     return redirect(urlmap.original)
-
-
-
-# kaonashi
-# =^..^=______/

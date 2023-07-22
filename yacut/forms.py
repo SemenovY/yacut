@@ -1,10 +1,14 @@
+"""Формы проекта."""
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, URLField
-from wtforms.validators import DataRequired, Length, Optional, URL
-from .constants import MAX_URL_SIZE,  MAX_SHORT_ID_SIZE
+from wtforms.validators import URL, DataRequired, Length, Optional
+
+from .constants import MAX_SHORT_ID_SIZE, MAX_URL_SIZE
 
 
 class URLForm(FlaskForm):
+    """Указываем поля формы и валидаторы."""
+
     original_link = URLField(
         'Длинная ссылка',
         validators=[DataRequired(message='Обязательное поле'),
@@ -17,7 +21,3 @@ class URLForm(FlaskForm):
                     Optional()]
     )
     submit = SubmitField('Добавить')
-
-
-# kaonashi
-# =^..^=______/
