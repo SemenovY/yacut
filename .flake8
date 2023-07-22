@@ -9,3 +9,6 @@
     migrations
  per-file-ignores =
     __init__.py: F401, E402, W292, A003, VNE003, N818, D107, D102
+    error_handlers.py: D107, D102
+    models.py: A003, VNE003
+    api_views.py: E128

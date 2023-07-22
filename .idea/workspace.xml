@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b31bb45d-f876-47cb-9222-72d5649df220" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.flake8" beforeDir="false" afterPath="$PROJECT_DIR$/.flake8" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -90,7 +88,7 @@
       <workItem from="1689846683547" duration="138000" />
       <workItem from="1690041991215" duration="98000" />
       <workItem from="1690042090908" duration="2882000" />
-      <workItem from="1690045197650" duration="51000" />
+      <workItem from="1690045197650" duration="512000" />
     </task>
     <servers />
   </component>
