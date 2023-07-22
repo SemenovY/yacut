@@ -8,4 +8,4 @@
     tests
     migrations
  per-file-ignores =
-    __init__.py: F401, E402
+    __init__.py: F401, E402, W292, A003, VNE003, N818, D107, D102
