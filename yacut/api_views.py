@@ -16,8 +16,10 @@ def get_url(short_id):
     """Получаем на вход короткую ссылку, проверяем и возвращаем оригинал."""
     data = URLMap.query.filter_by(short=short_id).first()
     if data is None:
-        raise Invalid_api_usage('Указанный id не найден',
-                              HTTPStatus.NOT_FOUND)
+        raise Invalid_api_usage(
+            'Указанный id не найден',
+            HTTPStatus.NOT_FOUND
+        )
     return jsonify(url=data.original), HTTPStatus.OK
 
 

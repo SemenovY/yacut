@@ -10,12 +10,14 @@ class Invalid_api_usage(Exception):
     status_code = 400
 
     def __init__(self, message, status_code=None):
+        """Check status_code."""
         super().__init__()
         self.message = message
         if status_code is not None:
             self.status_code = status_code
 
     def to_dict(self):
+        """Return a dictionary."""
         return dict(message=self.message)
 
 
