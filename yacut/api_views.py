@@ -1,9 +1,5 @@
-# what_to_watch/opinions_app/api_views.py
 from http import HTTPStatus
-
-# Импортируем метод jsonify
 from flask import jsonify, request
-
 from . import app, db
 from .models import URLMap
 from .error_handlers import InvalidAPIUsage
@@ -13,7 +9,7 @@ from .error_handlers import InvalidAPIUsage
 def get_url(short_id):
     data = URLMap.query.get(short_id)
     if data is None:
-        raise InvalidAPIUsage('В базе данных нет мнений', HTTPStatus.NO_CONTENT)
+        raise InvalidAPIUsage('Адрес не найден', HTTPStatus.NO_CONTENT)
     return jsonify({'url': data.to_dict()}), HTTPStatus.OK
 
 
@@ -43,8 +39,6 @@ def add_url():
 
 
 
-def get_unique_short_id():
-    pass
 
 # ヽ(´▽`)/
 
