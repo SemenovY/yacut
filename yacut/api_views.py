@@ -47,10 +47,7 @@ def add_url():
     if URLMap.query.filter_by(short=short_id).first() is not None:
         raise InvalidApiUsage(f'Имя "{short_id}" уже занято.')
 
-    if (
-            len(short_id) > MAX_SHORT_ID_SIZE
-            or not re.match(REG_CHECK, short_id)
-    ):
+    if len(short_id) > MAX_SHORT_ID_SIZE or not re.match(REG_CHECK, short_id):
         raise InvalidApiUsage(
             'Указано недопустимое имя для короткой ссылки',
             HTTPStatus.BAD_REQUEST
