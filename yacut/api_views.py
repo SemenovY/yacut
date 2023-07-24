@@ -6,7 +6,7 @@ from flask import jsonify, request
 
 from . import app, db
 from .constants import MAX_SHORT_ID_SIZE, REG_CHECK, SHORT_LINK
-from .error_handlers import Invalid_api_usage
+from .error_handlers import InvalidApiUsage
 from .models import URLMap
 from .utils import get_unique_short_id
 
@@ -14,9 +14,11 @@ from .utils import get_unique_short_id
 @app.route('/api/id/<string:short_id>/', methods=['GET'])
 def get_url(short_id):
     """Получаем на вход короткую ссылку, проверяем и возвращаем оригинал."""
-    data = URLMap.query.filter_by(short=short_id).first()
-    if data is None:
-        raise Invalid_api_usage(
+    try:
+        data = URLMap.query.filter_by(short=short_id).first_or_404()
+    except Exception:
+    # if data is None:
+        raise InvalidApiUsage(
             'Указанный id не найден',
             HTTPStatus.NOT_FOUND
         )
@@ -33,21 +35,24 @@ def add_url():
     """
     data = request.get_json()
     if not data:
-        raise Invalid_api_usage('Отсутствует тело запроса')
+        raise InvalidApiUsage('Отсутствует тело запроса')
+
     if 'url' not in data:
-        raise Invalid_api_usage('"url" является обязательным полем!')
-    if (
-            'custom_id' not in data or
-            data['custom_id'] == '' or
-            data['custom_id'] is None
-    ):
+        raise InvalidApiUsage('"url" является обязательным полем!')
+
+    if 'custom_id' not in data or not data['custom_id']:
         short_id = get_unique_short_id()
     else:
         short_id = data['custom_id']
+
     if URLMap.query.filter_by(short=short_id).first() is not None:
-        raise Invalid_api_usage(f'Имя "{short_id}" уже занято.')
-    if len(short_id) > MAX_SHORT_ID_SIZE or not re.match(REG_CHECK, short_id):
-        raise Invalid_api_usage(
+        raise InvalidApiUsage(f'Имя "{short_id}" уже занято.')
+
+    if (
+            len(short_id) > MAX_SHORT_ID_SIZE
+            or not re.match(REG_CHECK, short_id)
+    ):
+        raise InvalidApiUsage(
             'Указано недопустимое имя для короткой ссылки',
             HTTPStatus.BAD_REQUEST
         )
@@ -56,5 +61,5 @@ def add_url():
     db.session.add(url_map)
     db.session.commit()
     return jsonify(
-        url=url_map.original, short_link=SHORT_LINK + url_map.short
+        url=url_map.original, short_link=f'{SHORT_LINK}{url_map.short}'
     ), HTTPStatus.CREATED

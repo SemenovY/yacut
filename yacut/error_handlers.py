@@ -1,13 +1,15 @@
 """Кастомные ошибки для браузера и для API."""
+from http import HTTPStatus
+
 from flask import jsonify, render_template
 
 from . import app, db
 
 
-class Invalid_api_usage(Exception):
+class InvalidApiUsage(Exception):
     """Для апи, ошибка 400."""
 
-    status_code = 400
+    status_code = HTTPStatus.BAD_REQUEST
 
     def __init__(self, message, status_code=None):
         """Check status_code."""
@@ -21,20 +23,20 @@ class Invalid_api_usage(Exception):
         return dict(message=self.message)
 
 
-@app.errorhandler(Invalid_api_usage)
+@app.errorhandler(InvalidApiUsage)
 def invalid_api_usage(error):
     """Словарь и статус код."""
     return jsonify(error.to_dict()), error.status_code
 
 
-@app.errorhandler(404)
+@app.errorhandler(HTTPStatus.NOT_FOUND)
 def page_not_found(error):
     """Ошибка 404."""
-    return render_template('404.html'), 404
+    return render_template('404.html'), HTTPStatus.NOT_FOUND
 
 
-@app.errorhandler(500)
+@app.errorhandler(HTTPStatus.INTERNAL_SERVER_ERROR)
 def internal_error(error):
     """Ошибка 500."""
     db.session.rollback()
-    return render_template('500.html'), 500
+    return render_template('500.html'), HTTPStatus.INTERNAL_SERVER_ERROR
