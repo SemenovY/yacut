@@ -17,7 +17,6 @@ def get_url(short_id):
     try:
         data = URLMap.query.filter_by(short=short_id).first_or_404()
     except Exception:
-    # if data is None:
         raise InvalidApiUsage(
             'Указанный id не найден',
             HTTPStatus.NOT_FOUND
