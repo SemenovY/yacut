@@ -1,4 +1,4 @@
-"""Работа с API."""
+"""Working with the API."""
 import re
 from http import HTTPStatus
 
@@ -13,12 +13,12 @@ from .utils import get_unique_short_id
 
 @app.route('/api/id/<string:short_id>/', methods=['GET'])
 def get_url(short_id):
-    """Получаем на вход короткую ссылку, проверяем и возвращаем оригинал."""
+    """We receive a short link as input, check and return the original."""
     try:
         data = URLMap.query.filter_by(short=short_id).first_or_404()
     except Exception:
         raise InvalidApiUsage(
-            'Указанный id не найден',
+            'The specified id was not found.',
             HTTPStatus.NOT_FOUND
         )
     return jsonify(url=data.original), HTTPStatus.OK
@@ -27,17 +27,18 @@ def get_url(short_id):
 @app.route('/api/id/', methods=['POST'])
 def add_url():
     """
-    Получаем json, проверяем, если ошибка - выбрасываем raise.
+    We get json, check if there is an error - throw a raise.
 
-    Если короткую ссылку не передали, формируем ее.
-    Заносим в базу данных. Отправляем ответ и статус ОК.
+    If the short link is not passed, we form it.
+    We enter into the database.
+    Send response and status OK.
     """
     data = request.get_json()
     if not data:
-        raise InvalidApiUsage('Отсутствует тело запроса')
+        raise InvalidApiUsage('Missing request body')
 
     if 'url' not in data:
-        raise InvalidApiUsage('"url" является обязательным полем!')
+        raise InvalidApiUsage('"url" is a required field!')
 
     if 'custom_id' not in data or not data['custom_id']:
         short_id = get_unique_short_id()
@@ -45,11 +46,11 @@ def add_url():
         short_id = data['custom_id']
 
     if URLMap.query.filter_by(short=short_id).first() is not None:
-        raise InvalidApiUsage(f'Имя "{short_id}" уже занято.')
+        raise InvalidApiUsage(f'Name "{short_id}" already taken.')
 
     if len(short_id) > MAX_SHORT_ID_SIZE or not re.match(REG_CHECK, short_id):
         raise InvalidApiUsage(
-            'Указано недопустимое имя для короткой ссылки',
+            'An invalid name was specified for a short link',
             HTTPStatus.BAD_REQUEST
         )
 
