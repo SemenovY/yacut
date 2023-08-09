@@ -1,7 +1,7 @@
 """
-Для главной страницы обрабатываем POST запрос.
+For the main page, we process the POST request.
 
-Возвращаем рабочую ссылку.
+Returning a working link.
 """
 from http import HTTPStatus
 

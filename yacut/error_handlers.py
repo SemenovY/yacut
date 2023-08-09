@@ -1,4 +1,4 @@
-"""Кастомные ошибки для браузера и для API."""
+"""Custom errors for the browser and for the API."""
 from http import HTTPStatus
 
 from flask import jsonify, render_template

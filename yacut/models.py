@@ -10,7 +10,7 @@ from .constants import MAX_SHORT_ID_SIZE
 
 
 class URLMap(db.Model):
-    """Описаны поля модели и два конвертера для данных."""
+    """Model fields and two data converters are described."""
 
     id = db.Column(db.Integer, primary_key=True)
     original = db.Column(db.Text, nullable=False)

@@ -1,4 +1,4 @@
-"""Создаем рандомную ссылку для поля custom_id с проверкой на совпадение."""
+"""Create a random link for the custom_id field with a match check."""
 import random
 import string
 

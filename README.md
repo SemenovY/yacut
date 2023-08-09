@@ -1,4 +1,4 @@
-# **YaCut - Укротитель ссылок**
+# **YaCut - Link shortening service**
 [![Python](https://img.shields.io/badge/-Python-464646?style=flat&logo=Python&logoColor=ffffff&color=043A6B)](https://www.python.org/)
 ________
 
@@ -21,14 +21,14 @@ git clone git@github.com:SemenovY/yacut
 
 * Cоздать и активировать виртуальное окружение:
 ```
-python -m venv venv
+python3 -m venv venv
 
 source venv/Scripts/activate
 ```
 
 * Установить зависимости из файла requirements.txt:
 ```
-python -m pip install --upgrade pip
+python3 -m pip install --upgrade pip
 
 pip install -r requirements.txt
 ```
