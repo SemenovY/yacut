@@ -17,11 +17,10 @@ from .utils import get_unique_short_id
 @app.route('/', methods=['GET', 'POST'])
 def index_view():
     """
-    Получаем форму.
+    Get form.
 
-    Делаем проверки, при необходимости генерируем короткую ссылку.
-    Сохраняем в базу.
-    Возвращаем статус и уведомление.
+    We make checks, if necessary, generate a short link. We save to
+    the database. Return status and notification.
     """
     form = URLForm()
     if not form.validate_on_submit():
@@ -29,7 +28,7 @@ def index_view():
 
     short_url = form.custom_id.data
     if URLMap.query.filter_by(short=short_url).first() is not None:
-        flash(f'Имя {short_url} уже занято!')
+        flash(f'Name {short_url} already taken!')
         return render_template(INDEX_HTML, form=form)
     if short_url is None or short_url == '':
         form.custom_id.data = get_unique_short_id()
@@ -49,6 +48,6 @@ def index_view():
 
 @app.route('/<string:short>')
 def redirect_url(short):
-    """Возвращаем если есть ссылку, а для перехода - 404."""
+    """We return if there is a link, and for the transition - 404."""
     urlmap = URLMap.query.filter_by(short=short).first_or_404()
     return redirect(urlmap.original)

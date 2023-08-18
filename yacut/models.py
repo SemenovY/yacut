@@ -1,7 +1,7 @@
 """
-Модели проекта.
+Project Models.
 
-Так же в классе реализована конвертация данных.
+The class also implements data conversion.
 """
 from datetime import datetime
 
@@ -19,10 +19,10 @@ class URLMap(db.Model):
 
     def to_dict(self):
         """
-        Сериализатор.
+        Serializer.
 
-        Конвертируем сложный объект класса URLMap в словарь,
-        который состоит из простых типов данных Python.
+        Converting a Complex URLMap Class Object to a Dictionary
+        Consisting of Simple Python Data Types.
         """
         return dict(
             id=self.id,
@@ -33,10 +33,10 @@ class URLMap(db.Model):
 
     def from_dict(self, data):
         """
-        Десериализатор.
+        Deserializer.
 
-        Будем добавлять в пустой объект класса URLMap значения полей,
-        которые получены в POST-запросе.
+        We will add to the empty object of the URLMap class the values of
+        the fields that are received in the POST request.
         """
         for field in ['original', 'short']:
             if field in data:

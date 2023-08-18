@@ -7,7 +7,7 @@ from .models import URLMap
 
 
 def get_unique_short_id():
-    """Через random и string создаем ссылку, делаем проверку, возвращаем."""
+    """Through random and string we create a link, do a check, return."""
     while True:
         letters = string.ascii_letters + string.digits
         short_id = ''.join(random.choice(letters) for _ in range(MIN_SHORT))

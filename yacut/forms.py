@@ -7,29 +7,29 @@ from .constants import MAX_SHORT_ID_SIZE, REG_CHECK, SHORT_LINK
 
 
 class URLForm(FlaskForm):
-    """Указываем поля формы и валидаторы."""
+    """Specify form fields and validators."""
 
     original_link = URLField(
-        'Длинная ссылка',
+        'Long link',
         description=SHORT_LINK,
         validators=(
-            DataRequired(message='Обязательное поле'),
-            URL(message='Введите корректный URL адрес'),
+            DataRequired(message='Obligatory field'),
+            URL(message='Please enter a valid URL'),
         ),
     )
     custom_id = StringField(
-        'Ваш вариант короткой ссылки',
-        description='Ваш вариант короткой ссылки',
+        'Your Short Link',
+        description='Your Short Link',
         validators=(
             Length(
                 max=MAX_SHORT_ID_SIZE,
-                message='Длина поля не должна превышать 16 символов'
+                message='The field length must not exceed 16 characters'
             ),
             Optional(),
             Regexp(
                 REG_CHECK,
-                message='Ссылка может состоять только из латинских букв и цифр'
+                message='The link can only consist of letters and numbers'
             ),
         ),
     )
-    submit = SubmitField('Добавить')
+    submit = SubmitField('Add')
