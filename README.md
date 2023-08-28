@@ -11,29 +11,29 @@ ________
 * Python — высокоуровневый язык программирования.
 * Flask — фреймворк для создания веб-приложений на языке программирования Python, использующий набор инструментов Werkzeug, а также шаблонизатор Jinja2. Относится к категории так называемых микрофреймворков — минималистичных каркасов веб-приложений, сознательно предоставляющих лишь самые базовые возможности.
 
-## **Как запустить проект**:
+## **How to start a project**:
 
-* Клонировать репозиторий и перейти в него в командной строке:
+* Clone a repository and change to it on the command line:
 ```
 git clone git@github.com:SemenovY/yacut
 
 ```
 
-* Cоздать и активировать виртуальное окружение:
+* Create and activate virtual environment:
 ```
 python3 -m venv venv
 
 source venv/Scripts/activate
 ```
 
-* Установить зависимости из файла requirements.txt:
+* Install dependencies from a file requirements.txt:
 ```
 python3 -m pip install --upgrade pip
 
 pip install -r requirements.txt
 ```
 
-* Создать в корневой директории файл .env со следующими переменными:
+* Create an .env file in the root directory with the following variables:
 ```
 FLASK_APP=yacut
 FLASK_ENV=development или production
@@ -41,9 +41,9 @@ DATABASE_URI=sqlite:///db.sqlite3
 SECRET_KEY=<ваш_секретный_ключ>
 ```
 
-* Запустить приложение:
+* Launch the application:
 ```
 flask run
 ```
 _____________
-Автор: Семёнов Юрий -> GitHub: [SemenovY](https://github.com/SemenovY)
+Creator: Семёнов Юрий -> GitHub: [SemenovY](https://github.com/SemenovY)
