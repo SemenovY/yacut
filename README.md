@@ -1,15 +1,19 @@
 # **YaCut - Link shortening service**
 [![Python](https://img.shields.io/badge/-Python-464646?style=flat&logo=Python&logoColor=ffffff&color=043A6B)](https://www.python.org/)
+[![Scrapy](https://img.shields.io/badge/-Scrapy-464646?style=flat&logo=Scrapy&logoColor=ffffff&color=043A6B)](https://scrapy.org/)
+[![XPath](https://img.shields.io/badge/-XPath-464646?style=flat&logo=XPath&logoColor=ffffff&color=043A6B)](https://www.python.org/)
+[![CSS](https://img.shields.io/badge/-CSS-464646?style=flat&logo=CSS&logoColor=ffffff&color=043A6B)](https://www.python.org/)
+[![Pytest](https://img.shields.io/badge/-Pytest-464646?style=flat&logo=Pytest&logoColor=ffffff&color=043A6B)](https://www.python.org/)
 ________
 
 
-Проект YaCut — это сервис укорачивания ссылок. Его назначение — ассоциировать длинную пользовательскую ссылку с короткой, которую предлагает сам пользователь или предоставляет сервис.
+The YaCut project is a link shortening service. Its purpose is to associate a long user link with a short link that is offered by the user or provided by the service.
 
-**Для проекта также написан API**
-## Технологии проекта
+**An API has also been written for the project**
+##Project Technologies
 
-* Python — высокоуровневый язык программирования.
-* Flask — фреймворк для создания веб-приложений на языке программирования Python, использующий набор инструментов Werkzeug, а также шаблонизатор Jinja2. Относится к категории так называемых микрофреймворков — минималистичных каркасов веб-приложений, сознательно предоставляющих лишь самые базовые возможности.
+* Python — a high-level programming language.
+* Flask — is a framework for creating web applications in the Python programming language, using the Werkzeug toolkit and the Jinja2 templating engine. It belongs to the category of so-called microframeworks - minimalistic web application frameworks that deliberately provide only the most basic features.
 
 ## **How to start a project**:
 
@@ -46,4 +50,8 @@ SECRET_KEY=<ваш_секретный_ключ>
 flask run
 ```
 _____________
-Creator: Семёнов Юрий -> GitHub: [SemenovY](https://github.com/SemenovY)
+***The following worked on the project:***
+* Yuriy Semenov | GitHub: [SemenovY](https://github.com/SemenovY) | Python developer.
+
+### *Free Software, Not for commercial use!*
+### =^..^=______/
