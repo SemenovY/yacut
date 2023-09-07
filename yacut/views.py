@@ -6,6 +6,7 @@ Returning a working link.
 from http import HTTPStatus
 
 from flask import flash, redirect, render_template
+from setuptools._entry_points import render
 
 from . import app, db
 from .constants import INDEX_HTML
@@ -51,3 +52,11 @@ def redirect_url(short):
     """We return if there is a link, and for the transition - 404."""
     urlmap = URLMap.query.filter_by(short=short).first_or_404()
     return redirect(urlmap.original)
+
+
+@app.route('/', methods=['GET'])
+def test_or_404(request):
+    """Test"""
+    if request.method == 'GET':
+        return redirect(request.method)
+    return render(request)
