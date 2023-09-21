@@ -41,3 +41,6 @@ class URLMap(db.Model):
         for field in ['original', 'short']:
             if field in data:
                 setattr(self, field, data[field])
+
+    def test_serializer(self, data):
+        pass

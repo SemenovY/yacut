@@ -61,3 +61,9 @@ def test_or_404(request):
     if request.method == 'GET':
         return redirect(request.method)
     return render(request)
+
+@logger.catch
+@app.route('/', methods=['GET'])
+def test_adress(request):
+    """Test for getting access"""
+    pass

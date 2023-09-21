@@ -13,3 +13,7 @@ def get_unique_short_id():
         short_id = ''.join(random.choice(letters) for _ in range(MIN_SHORT))
         if URLMap.query.filter_by(short=short_id).first() is None:
             return short_id
+
+def get_adress():
+    """Get the address"""
+    pass
