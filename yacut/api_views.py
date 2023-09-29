@@ -1,4 +1,5 @@
 """Working with the API."""
+import asyncio
 import re
 from http import HTTPStatus
 
@@ -12,10 +13,10 @@ from .utils import get_unique_short_id
 
 
 @app.route('/api/id/<string:short_id>/', methods=['GET'])
-def get_url(short_id):
+async def get_url(short_id):
     """We receive a short link as input, check and return the original."""
     try:
-        data = URLMap.query.filter_by(short=short_id).first_or_404()
+        data = await URLMap.query.filter_by(short=short_id).first_or_404()
     except Exception:
         raise InvalidApiUsage(
             'The specified id was not found.',
@@ -25,7 +26,7 @@ def get_url(short_id):
 
 
 @app.route('/api/id/', methods=['POST'])
-def add_url():
+async def add_url():
     """
     We get json, check if there is an error - throw a raise.
 
@@ -33,7 +34,7 @@ def add_url():
     We enter into the database.
     Send response and status OK.
     """
-    data = request.get_json()
+    data = await request.get_json()
     if not data:
         raise InvalidApiUsage('Missing request body')
 
@@ -60,3 +61,14 @@ def add_url():
     return jsonify(
         url=url_map.original, short_link=f'{SHORT_LINK}{url_map.short}'
     ), HTTPStatus.CREATED
+
+
+async def main():
+    """Add asynchronous."""
+    task1 = asyncio.create_task(get_url())
+    task2 = asyncio.create_task(add_url())
+
+    await task1
+    await task2
+
+asyncio.run(main())
