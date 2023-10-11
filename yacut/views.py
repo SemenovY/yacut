@@ -6,8 +6,6 @@ Returning a working link.
 from http import HTTPStatus
 
 from flask import flash, redirect, render_template
-from setuptools._entry_points import
-from loguru import logging
 
 from . import app, db
 from .constants import INDEX_HTML
@@ -15,7 +13,7 @@ from .forms import URLForm
 from .models import URLMap
 from .utils import get_unique_short_id
 
-@logger.catch
+
 @app.route('/', methods=['GET', 'POST'])
 def index_view():
     """
@@ -47,23 +45,9 @@ def index_view():
         HTTPStatus.OK
     )
 
-@logger.catch
+
 @app.route('/<string:short>')
 def redirect_url(short):
     """We return if there is a link, and for the transition - 404."""
     urlmap = URLMap.query.filter_by(short=short).first_or_404()
     return redirect(urlmap.original)
-
-@logger.catch
-@app.route('/', methods=['GET'])
-def test_or_404(request):
-    """Test"""
-    if request.method == 'GET':
-        return redirect(request.method)
-    return render(request)
-
-@logger.catch
-@app.route('/', methods=['GET'])
-def test_adress(request):
-    """Test for getting access"""
-    pass

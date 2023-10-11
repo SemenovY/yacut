@@ -1,5 +1,4 @@
 """Working with the API."""
-import asyncio
 import re
 from http import HTTPStatus
 
@@ -61,14 +60,3 @@ async def add_url():
     return jsonify(
         url=url_map.original, short_link=f'{SHORT_LINK}{url_map.short}'
     ), HTTPStatus.CREATED
-
-
-async def main():
-    """Add asynchronous."""
-    task1 = asyncio.create_task(get_url())
-    task2 = asyncio.create_task(add_url())
-
-    await task1
-    await task2
-
-asyncio.run(main())
